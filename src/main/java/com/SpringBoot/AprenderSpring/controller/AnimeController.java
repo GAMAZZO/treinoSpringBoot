@@ -2,11 +2,12 @@ package com.SpringBoot.AprenderSpring.controller;
 // Classe onde ficam os end points
 
 import com.SpringBoot.AprenderSpring.domain.Anime;
+import com.SpringBoot.AprenderSpring.requests.AnimePostRequestBody;
+import com.SpringBoot.AprenderSpring.requests.AnimePutRequestBody;
 import com.SpringBoot.AprenderSpring.service.AnimeService;
 import com.SpringBoot.AprenderSpring.util.DataUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,13 +32,13 @@ public class AnimeController {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Anime> findBtyd(@PathVariable long id){
-        return ResponseEntity.ok(animeService.findById(id));
+        return ResponseEntity.ok(animeService.findByIdOrThrowBadRequestException(id));
     }
 
     @PostMapping
     @ResponseStatus()
-    public ResponseEntity<Anime> save(@RequestBody Anime anime){
-        return new ResponseEntity<>(animeService.save(anime), HttpStatus.CREATED);
+    public ResponseEntity<Anime> save(@RequestBody AnimePostRequestBody animePostRequestBody){
+        return new ResponseEntity<>(animeService.save(animePostRequestBody), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -47,8 +48,8 @@ public class AnimeController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> replace(@RequestBody Anime anime){
-        animeService.replace(anime);
+    public ResponseEntity<Void> replace(@RequestBody AnimePutRequestBody animePutRequestBody){
+        animeService.replace(animePutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
