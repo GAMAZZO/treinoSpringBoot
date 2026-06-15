@@ -2,6 +2,7 @@ package com.SpringBoot.AprenderSpring.service;
 // Lógica de negócios
 
 import com.SpringBoot.AprenderSpring.domain.Anime;
+import com.SpringBoot.AprenderSpring.exception.BadRequestException;
 import com.SpringBoot.AprenderSpring.mapper.AnimeMapper;
 import com.SpringBoot.AprenderSpring.repository.AnimeRepository;
 import com.SpringBoot.AprenderSpring.requests.AnimePostRequestBody;
@@ -29,7 +30,8 @@ public class AnimeService {
     }
 
     public Anime findByIdOrThrowBadRequestException(long id){
-      return animeRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Anime not found"));
+      return animeRepository.findById(id)
+              .orElseThrow(() -> new BadRequestException("Anime not found"));
     }
 
     public Anime save(AnimePostRequestBody animePostRequestBody) {
