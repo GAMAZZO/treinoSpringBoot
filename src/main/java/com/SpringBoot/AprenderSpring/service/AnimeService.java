@@ -2,6 +2,7 @@ package com.SpringBoot.AprenderSpring.service;
 // Lógica de negócios
 
 import com.SpringBoot.AprenderSpring.domain.Anime;
+import com.SpringBoot.AprenderSpring.mapper.AnimeMapper;
 import com.SpringBoot.AprenderSpring.repository.AnimeRepository;
 import com.SpringBoot.AprenderSpring.requests.AnimePostRequestBody;
 import com.SpringBoot.AprenderSpring.requests.AnimePutRequestBody;
@@ -27,21 +28,17 @@ public class AnimeService {
     }
 
     public Anime save(AnimePostRequestBody animePostRequestBody) {
-        return animeRepository.save(Anime.builder().name(animePostRequestBody.getName()).build());
+
+        return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
     }
 
     public void delete(long id) {
         animeRepository.delete(findByIdOrThrowBadRequestException(id));
     }
 
-    public void replace(AnimePutRequestBody animePutRequestBody) {
-
+        public void replace(AnimePutRequestBody animePutRequestBody) {
         Anime savedAnime = findByIdOrThrowBadRequestException(animePutRequestBody.getId());
-
-        Anime anime = Anime.builder()
-                .id(savedAnime.getId())     // (savedAnime)Pra ter certeza que o id é o que está no banco de dados e o resto do objeto vai ser atualizado
-                .name(animePutRequestBody.getName())    //(savedAnime faz a mesma coisa que animePutRequestBody.getName())
-                        .build();
+        Anime anime = AnimeMapper.INSTANCE.toAnime(animePutRequestBody);
         animeRepository.save(anime);
         //save() Ele serve tanto para INSERT quanto UPDATE, se não tiver id INSERT, se tiver UPDATE
     }
