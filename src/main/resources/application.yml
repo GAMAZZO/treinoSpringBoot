@@ -1,7 +1,6 @@
 server:
   error:
-    include-stacktrace: never
-    include-message: never
+    include-stacktrace: on_param
 
 spring:
   datasource:
