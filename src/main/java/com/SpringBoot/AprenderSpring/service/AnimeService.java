@@ -8,11 +8,8 @@ import com.SpringBoot.AprenderSpring.repository.AnimeRepository;
 import com.SpringBoot.AprenderSpring.requests.AnimePostRequestBody;
 import com.SpringBoot.AprenderSpring.requests.AnimePutRequestBody;
 import lombok.RequiredArgsConstructor;
-import org.jspecify.annotations.Nullable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
