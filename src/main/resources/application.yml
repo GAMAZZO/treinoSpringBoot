@@ -1,6 +1,6 @@
 server:
   error:
-    include-stacktrace: on_param
+    include-stacktrace: on-trace-param
 
 spring:
   datasource:
@@ -11,5 +11,3 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-  devtools:
-    add-properties: false
