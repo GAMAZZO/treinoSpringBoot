@@ -8,6 +8,7 @@ import com.SpringBoot.AprenderSpring.repository.AnimeRepository;
 import com.SpringBoot.AprenderSpring.requests.AnimePostRequestBody;
 import com.SpringBoot.AprenderSpring.requests.AnimePutRequestBody;
 import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.Nullable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,10 @@ public class AnimeService {
 
     public Page<Anime> listAll(Pageable pageable){
       return animeRepository.findAll(pageable);
+    }
+
+    public List<Anime> listAllNonPegeable() {
+        return animeRepository.findAll();
     }
 
     public List<Anime> findByName(String name){
@@ -49,5 +54,4 @@ public class AnimeService {
         animeRepository.save(anime);
         //save() Ele serve tanto para INSERT quanto UPDATE, se não tiver id INSERT, se tiver UPDATE
     }
-
 }
